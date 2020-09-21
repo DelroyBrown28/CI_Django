@@ -13,7 +13,7 @@ import os
 import dj_database_url
 from pathlib import Path
 
-development = os.environ.get('DEVELOPMENT', False)
+development = os.environ.get('DEVELOPMENT', True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +29,8 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = development
 
-ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
+ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'), "127.0.0.1"]
+
 
 
 # Application definition

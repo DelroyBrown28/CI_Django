@@ -12,8 +12,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
+from os import path
+import django_heroku
+if os.path.exists("env.py"):
+    import env
 
-development = os.environ.get('DEVELOPMENT', True)
+development = os.environ.get('DEVELOPMENT')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', "uc4%sh96l=+-83xaamzn0!f8bdvo(_a4ai1!&2s_@+v2)jv7a=")
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', "uc4%sh96l=+-83xaamzn0!f8bdvo(_a4ai1!&2s_@+v2)jv7a=")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = development
 
 ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'), "127.0.0.1"]
-
 
 
 # Application definition
@@ -128,3 +132,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
